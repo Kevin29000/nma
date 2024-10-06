@@ -1,0 +1,23 @@
+<div class="my-food_add_food_button_container">
+    <button (click)="goToCreateFood()" class="my-food_add_food_button">Ajouter un aliment</button>
+</div>
+
+<app-search-food></app-search-food>
+
+<div class="my-food_card_container">
+    <div *ngFor="let food of foods | sort:'name' " (click)="goToFood(food)" class="my-food_card" myFoodBorderCard="red">
+        <table class="my-food_table">
+            <tr><td>Nom :</td><td><b>{{ food.name }}</b></td></tr>
+            <tr><td>Calories :</td><td>{{ food.calories }} kcal</td></tr>
+            <tr><td>Protéines :</td><td>{{ food.proteins | formatDecimal }} g</td></tr>
+            <tr><td>Glucides :</td><td>{{ food.carbohydrates | formatDecimal }} g</td></tr>
+            <tr><td>Lipides :</td><td>{{ food.lipids | formatDecimal }} g</td></tr>
+        </table>
+    </div>
+</div>
+
+<div class="my-food_add_food_button_container">
+    <button (click)="goToCreateFood()" class="my-food_add_food_button">Ajouter un aliment</button>
+</div>
+
+<router-outlet></router-outlet>

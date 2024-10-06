@@ -1,0 +1,4 @@
+<h2 *ngIf="isNewUser">Créer mon profile</h2>
+<h2 *ngIf="!isNewUser">Éditer mon profile</h2>
+
+<app-user-profile-form *ngIf="user" [user]="user"></app-user-profile-form>

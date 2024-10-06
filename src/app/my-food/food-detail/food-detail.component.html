@@ -1,0 +1,18 @@
+<div class="my-food-detail_card_container">
+    <div *ngIf="food" class="my-food-detail_card">
+        <table class="my-food-detail_table">
+            <h1>{{ food.name }}</h1>
+            <tr><td>Calories :</td><td>{{ food.calories }}</td><td>kcal</td></tr>
+            <tr><td>Protéines :</td><td>{{ food.proteins | formatDecimal }}</td><td>g</td></tr>
+            <tr><td>Glucides :</td><td>{{ food.carbohydrates | formatDecimal }}</td><td>g</td></tr>
+            <tr><td>Lipides :</td><td>{{ food.lipids | formatDecimal }}</td><td>g</td></tr><br>
+            <tr><td><a (click)="goToMyFood()">Retour</a></td><td><button (click)="confirmDeleteFood()" class="btn btn-danger">Delete</button></td><td><a (click)="goToEditFood(food)">Éditer</a></td></tr>
+        </table>
+    </div>
+</div>
+
+<div *ngIf='!food' class="error_my-food-detail"><app-loader></app-loader>
+    <div>
+        <a (click)="goToMyFood()">Retour</a>
+    </div>
+</div>

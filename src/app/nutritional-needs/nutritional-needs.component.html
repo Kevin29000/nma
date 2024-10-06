@@ -1,0 +1,11 @@
+<p>D'apèrs vos informations, votre métabolisme de base est estimé à : {{ nutritionalNeeds?.bmr | integerFormat }} calories</p><br>
+
+<p>D'après votre niveau d'activité et votre objectif, vous avez besoin de consommer : {{ nutritionalNeeds?.targetCalories | integerFormat }} calories</p><br>
+
+<p>Pour atteindre votre objectif : {{ currentUser?.goalLabel }}, vous avez besoin de consommer : {{ nutritionalNeeds?.proteins | integerFormat }} g de protéines, {{ nutritionalNeeds?.carbohydrates | integerFormat }} g de glucides et {{ nutritionalNeeds?.lipids | integerFormat }} g de lipides</p><br>
+
+<p>Protéines en calories : {{ nutritionalNeeds?.proteinsCalories | integerFormat }}</p>
+<p>Carbohydrates en calories : {{ nutritionalNeeds?.carbohydratesCalories | integerFormat }}</p>
+<p>Lipides en calories : {{ nutritionalNeeds?.lipidsCalories | integerFormat }}</p>
+
+<router-outlet></router-outlet>

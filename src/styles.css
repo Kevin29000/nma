@@ -1,0 +1,516 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* //////////////////////////////////////////////// ScrollBar //////////////////////////////////////////////// */
+
+::-webkit-scrollbar {
+    width: 8px; /*pour les verticales*/
+    height: 8px; /*pour les horizontales*/
+}
+
+::-webkit-scrollbar-track { /*Couleur de la barre*/
+    background: white;
+}
+
+::-webkit-scrollbar-thumb { /*L'indicateur de position*/
+    background-color: #1b1b1bbb;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover { /*L'indicateur de position*/
+    background-color: #1b1b1b98;
+}
+
+/* //////////////////////////////////////////////// Login Page //////////////////////////////////////////////// */
+
+body, html { /* //////////////////////////////////////////////// A surveiller si ça change des choses //////////////////////////////////////////////// */
+    height: 90%;
+    margin: 0;
+}
+
+.login_container_center {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 30px;
+    margin: 0;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.login_container h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 35px;
+}
+
+.login_container p {
+    margin-bottom: 15px;
+    color: #888;
+    font-style: italic;
+}
+
+.login_form {
+    width: 100%;
+}
+
+.form_group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.form_group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.form_group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form_group input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.login_button {
+    background-color: #3498db;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 15px;
+    transition: background-color 0.3s;
+}
+
+.login_button:hover {
+    background-color: #2980b9;
+}
+
+@media (max-width: 600px) {
+    .login_container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* //////////////////////////////////////////////// Menu //////////////////////////////////////////////// */
+
+.header {
+    background-color: #e21818;
+    height: 150px;
+    text-align: center;
+}
+
+nav ul {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    list-style-type: none;
+    padding: 15px 30px;
+}
+
+ul li a {
+    color: #fff;
+    font-size: 200%;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    color: #e77f09;
+    text-decoration: underline;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    padding: 15px 25px;
+    margin: 0 25px;
+}
+
+.title_app {
+    font-size: 350%;
+    color: white;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* //////////////////////////////////////////////// Profile //////////////////////////////////////////////// */
+
+.logout_button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 15%;
+    font-size: 15px;
+    transition: background-color 0.3s;
+}
+
+.logout_button:hover {
+    background-color: #c0392b;
+}
+
+/* //////////////////////////////////////////////// My-Food Cards //////////////////////////////////////////////// */
+
+.my-food_card_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.my-food_card {
+    width: calc(25% - 30px); /* 4 cartes par ligne */
+    height: 125px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+    overflow: hidden;
+    transition: transform 0.6s ease;
+    display: flex; /* Pour centrer le contenu de la carte */
+    justify-content: center; /* Centre le tableau horizontalement */
+    align-items: center; /* Centre le tableau verticalement */
+    padding: 20px; /* Ajoute un peu de padding autour du tableau */
+    text-align: center; /* Centre le texte dans le tableau */
+}
+
+@media screen and (max-width: 1200px) {
+    .my-food_card {
+        width: calc(33.33% - 30px); /* 3 cartes par ligne */
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .my-food_card {
+        width: calc(50% - 30px); /* 2 cartes par ligne */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .my-food_card {
+        width: calc(100% - 30px); /* 1 carte par ligne */
+    }
+}
+
+.my-food_table {
+    text-align: left; /* Alignement à gauche du texte dans le tableau */
+}
+
+.my-food_card a {
+    text-decoration: none;
+    color: black;
+    font-size: 130%;
+}
+
+.my-food_card:hover {
+    transform: translateY(-20px);
+}
+
+/* //////////////////////////////////////////////// My-Food Search Food Input //////////////////////////////////////////////// */
+
+.input_search_food_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    width: 25%;
+    border-radius: 40px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+.input_search_food {
+    margin-top: 20px;
+    width: 80%;
+    padding: 8px;
+    border: 3px solid #e21818;
+    border-radius: 40px;
+    text-align: center;
+    font-size: 18px;
+    transition: border 0.3s;
+}
+
+.input_search_food:focus {
+    border-color: #e21818;
+    outline: none;
+}
+
+.input_search_food::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+.input_search_food_lines {
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    width: 80%;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.input_search_food_lines a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+}
+
+.input_search_food_lines a:hover {
+    background-color: #f0f0f0;
+}
+
+/* //////////////////////////////////////////////// My-Food Add Food Button //////////////////////////////////////////////// */
+
+.my-food_add_food_button_container {
+    display: flex;
+    justify-content: center;
+}
+
+.my-food_add_food_button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: #e21818;
+    border: none;
+    padding: 15px 32px;
+    border-radius: 40px;
+    color: white;
+    text-align: center;
+    font-size: 200%;
+    cursor: pointer;
+}
+
+/*
+.router_btn {
+    background-color: #1618bb;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+*/ 
+
+/* //////////////////////////////////////////////// My-Food-Detail Card //////////////////////////////////////////////// */
+
+.my-food-detail_card_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    /*cursor: pointer;*/
+    margin-top: 50px;
+}
+
+.my-food-detail_card {
+    width: 40%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+    overflow: hidden;
+    transition: transform 0.6s ease;
+    display: flex; /* Pour centrer le contenu de la carte */
+    justify-content: center; /* Centre le tableau horizontalement */
+    align-items: center; /* Centre le tableau verticalement */
+    padding: 20px; /* Ajoute un peu de padding autour du tableau */
+    text-align: center; /* Centre le texte dans le tableau */
+    font-size: 300%;
+}
+
+.my-food-detail_table {
+    text-align: left; /* Alignement à gauche du texte dans le tableau */
+}
+
+.my-food-detail_table a {
+    cursor: pointer;
+}
+
+.my-food-detail_card:hover {
+    transform: translateY(-20px);
+}
+
+/* //////////////////////////////////////////////// My-Food-Detail-Edit Card //////////////////////////////////////////////// */
+
+.my-food-detail-edit_title {
+    text-align: center;
+    font-size: 500%;
+    margin-top: 30px;
+}
+
+.my-food-detail-edit_title hr {
+    border: 3px solid;
+    border-radius: 10px;
+    margin-left: 500px;
+    margin-right: 500px;
+}
+
+.my-food-detail-edit_card_container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    /*cursor: pointer;*/
+    margin-top: 50px;
+}
+
+.my-food-detail-edit_card {
+    width: 40%;
+    background-color: rgba(255, 0, 0, 0.671);
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+    overflow: hidden;
+    transition: transform 0.6s ease;
+    display: flex; /* Pour centrer le contenu de la carte */
+    justify-content: center; /* Centre le tableau horizontalement */
+    align-items: center; /* Centre le tableau verticalement */
+    padding: 20px; /* Ajoute un peu de padding autour du tableau */
+    text-align: center; /* Centre le texte dans le tableau */
+}
+
+.my-food-detail-edit_table {
+    text-align: left; /* Alignement à gauche du texte dans le tableau */
+}
+
+.my-food-detail-edit_table a {
+    cursor: pointer;
+    font-size: 200%;
+}
+
+.my-food-detail-edit_table label {
+    font-size: 180%;
+    font-weight: bold;
+}
+
+.food-edit-input {
+    width: 300px;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding-left: 25px;
+    font-weight: 500;
+    color: black;
+    border-radius: 20px;
+}
+
+.food-edit_submit_button {
+    margin-top: 5px;
+    color: white;
+    background-color: #09e0e7;
+    width: 200px;
+    height: 50px;
+    font-size: 21px;
+    border-radius: 20px;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.food_form .ng-valid[required] { /* Seulement sur les champs name, hp, cp PAS LES CHECKBOX*/
+    border: 3px solid #42A948;
+}
+
+.food_form .ng-invalid[required] { /* Seulement sur les champs name, hp, cp PAS LES CHECKBOX*/
+    border: 3px solid #A94442;
+}
+
+/* ////////////////////////////////////////////////  My-Food Loader //////////////////////////////////////////////// */
+
+.loader_container {
+    display: flex; /* Utiliser flexbox */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
+    height: 50vh; /* Prendre toute la hauteur de la vue */
+    background-color: #f0f0f0; /* Optionnel : couleur de fond */
+}
+
+.loader {
+    border: 8px solid rgba(255, 255, 255, 0.3); /* Couleur de fond */
+    border-top: 8px solid #3498db; /* Couleur de la partie supérieure */
+    border-radius: 50%; /* Arrondi pour créer un cercle */
+    width: 50px; /* Largeur du loader */
+    height: 50px; /* Hauteur du loader */
+    animation: spin 1s linear infinite; /* Animation */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* //////////////////////////////////////////////// Error 404 //////////////////////////////////////////////// */
+
+.error_404 {
+    font-size: 1000%;
+    text-align: center;
+}
+
+.error_404_message {
+    font-size: 300%;
+    text-align: center;
+}
+
+/* //////////////////////////////////////////////// Error my-food-detail //////////////////////////////////////////////// */
+
+.error_my-food-detail {
+    font-size: 1000%;
+    text-align: center;
+}

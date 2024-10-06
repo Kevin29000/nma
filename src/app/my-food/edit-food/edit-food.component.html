@@ -1,0 +1,3 @@
+<div class="my-food-detail-edit_title"><h2>Éditer {{ food?.name }}</h2><hr></div>
+
+<app-food-form *ngIf="food" [food]="food" [isEditMode]="true"></app-food-form>
