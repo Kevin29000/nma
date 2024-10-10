@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Food } from '../food';
-import { FOOD } from '../food-list';
 import { FoodService } from '../../food.service';
 import { FormatDecimalPipe } from '../format-decimal.pipe';
 import { LoaderComponent } from '../loader/loader.component';

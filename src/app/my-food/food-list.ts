@@ -1,3 +1,4 @@
+/*
 import { Food } from "./food";
 
 export const FOOD: Food [] = [ // liste des aliments
@@ -162,3 +163,4 @@ export const FOOD: Food [] = [ // liste des aliments
         lipids: 5
     }
 ]
+    */

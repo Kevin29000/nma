@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Food } from '../food';
 import { Router } from '@angular/router';
 import { FoodService } from '../../food.service';
 import { LoaderComponent } from '../loader/loader.component';
+import { UserLoginService } from '../../userLogin.service';
+import { User } from '../../profile/user.model';
 
 @Component({
   selector: 'app-food-form',
@@ -17,16 +19,30 @@ import { LoaderComponent } from '../loader/loader.component';
   templateUrl: './food-form.component.html',
   styles: ''
 })
-export class FoodFormComponent {
+export class FoodFormComponent implements OnInit {
   @Input() food: Food;
   @Input() isEditMode: boolean = false;
 
+  currentUser: User | null = null;
+
   constructor(
     private router: Router,
-    private foodService: FoodService
+    private foodService: FoodService,
+    private userLoginService: UserLoginService
   ) {}
 
+  ngOnInit(): void {
+      this.currentUser = this.userLoginService.getCurrentUser();
+  }
+
   onSubmit() {
+    const userId = this.currentUser?.id;
+
+    if (!userId) {
+      console.error('User ID is undefined. Cannot create food');
+      return;
+    }
+
     if (this.isEditMode) {
       this.foodService.updateFood(this.food.id, this.food).subscribe(
         () => {
@@ -37,7 +53,7 @@ export class FoodFormComponent {
         }
       );
     } else {
-      this.foodService.createFood(this.food).subscribe({
+      this.foodService.createFood(this.food, userId).subscribe({
         next: (response: Food) => {
           console.log('Aliment créé avec succès ', response);
           this.router.navigate(['/my-food'])

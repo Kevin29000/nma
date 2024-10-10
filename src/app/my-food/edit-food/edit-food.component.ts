@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Food } from '../food';
 import { ActivatedRoute } from '@angular/router';
-import { FOOD } from '../food-list';
 import { FoodFormComponent } from '../food-form.component/food-form.component';
 import { FoodService } from '../../food.service';
 

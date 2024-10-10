@@ -2,14 +2,15 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Food } from './food';
-import { FOOD } from './food-list';
 import { MyFoodBorderCardDirective } from './my-food-border-card.directive';
 import { FoodService } from '../food.service'; //
 import { FormatDecimalPipe } from './format-decimal.pipe';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, switchMap } from 'rxjs';
 import { SortPipe } from './sort.pipe';
-import { SearchFoodComponent } from '../profile/search-food/search-food.component';
+import { User } from '../profile/user.model';
+import { UserLoginService } from '../userLogin.service';
+import { SearchFoodComponent } from './search-food/search-food.component';
 
 @Component({
   selector: 'app-my-food',
@@ -30,21 +31,32 @@ export class MyFoodComponent implements OnInit {
 
   foods: Food[] = [];
 
+  currentUser: User | null = null;
+
   // foodList:Food[] = FOOD; // la propriété foodList est de type Food et est un tableau et contient la liste d'aliments FOOD, :Food[] c'est pour ne pas mettre n'importe quoi dans foodList
   
   constructor(
     private router: Router,
-    private foodService: FoodService
+    private foodService: FoodService,
+    private userLoginService: UserLoginService
   ) {}
 
   ngOnInit(): void {
-      this.loadFoods();
+    this.currentUser = this.userLoginService.getCurrentUser();
+    this.loadFoods();
   }
 
   loadFoods(): void {
-    this.foodService.getAllFoods().subscribe((data) => {
-      this.foods = data;
-    });
+    const userId = this.currentUser?.id;
+
+    if (userId !== undefined) {
+      this.foodService.getUserAllFoods(userId).subscribe((data) => {
+        this.foods = data;
+      });
+    } else {
+      console.error('User ID is undefined');
+      console.error(this.currentUser);
+    }
   }
 
   goToCreateFood () {
