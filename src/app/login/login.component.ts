@@ -38,14 +38,14 @@ export class LoginComponent {
   }
 
   login() {
-    this.message = 'Email ou mot de passe incorrect';
+    this.message = 'Chargement ...';
     this.userLoginService.login(this.userLogin).subscribe(
       (user) => {
         console.log("Login successful, navigating to profile...");
         this.router.navigate(['/profile']);
       },
       (error) => {
-        this.errorMessage = 'Invalid email or password';
+        this.message = 'Email ou mot de passe incorrect';
       }
     );
   }

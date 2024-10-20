@@ -1,13 +1,29 @@
 <div class="my-food-detail_card_container">
     <div *ngIf="food" class="my-food-detail_card">
-        <table class="my-food-detail_table">
+        <div class="my-food-detail_card_title">
             <h1>{{ food.name }}</h1>
-            <tr><td>Calories :</td><td>{{ food.calories }}</td><td>kcal</td></tr>
-            <tr><td>Protéines :</td><td>{{ food.proteins | formatDecimal }}</td><td>g</td></tr>
-            <tr><td>Glucides :</td><td>{{ food.carbohydrates | formatDecimal }}</td><td>g</td></tr>
-            <tr><td>Lipides :</td><td>{{ food.lipids | formatDecimal }}</td><td>g</td></tr><br>
-            <tr><td><a (click)="goToMyFood()">Retour</a></td><td><button (click)="confirmDeleteFood()" class="btn btn-danger">Delete</button></td><td><a (click)="goToEditFood(food)">Éditer</a></td></tr>
-        </table>
+        </div>
+        <div class="my-food-detail_details">
+            <span class="my-food_detail_title">Calories</span>
+            <span class="my-food_detail_title">Protéines</span>
+            <span class="my-food_detail_title">Glucides</span>
+            <span class="my-food_detail_title">Lipides</span>
+            <span class="my-food_detail_value">{{ food.calories | integerFormat }} kcal</span>
+            <div class="my-food-detail_proteins">
+                <span class="my-food_detail_value">{{ food.proteins | formatDecimal }} g</span>
+            </div>
+            <div class="my-food-detail_carbohydrates">
+                <span class="my-food_detail_value">{{ food.carbohydrates | formatDecimal }} g</span>
+            </div>
+            <div class="my-food-detail_lipids">
+                <span class="my-food_detail_value">{{ food.lipids | formatDecimal }} g</span>
+            </div>                
+        </div>
+        <div class="food-detail_buttons_container">
+            <button (click)="goToEditFood(food)" class="food-detail_buttons">Éditer</button>
+            <button (click)="confirmDeleteFood()" class="food-detail_buttons">Supprimer</button>
+            <button (click)="goToMyFood()" class="food-detail_buttons">Retour</button>
+        </div>
     </div>
 </div>
 

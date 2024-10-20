@@ -8,6 +8,7 @@ export class User {
     weight: number;
     gender: 'masculin' | 'feminin' | '';
     birthdate: string;
+    age: number | null;
     activity: 'sedentaire' | 'legerementActif' | 'moderementActif' | 'tresActif' | 'extemementActif' | '';
     goal: 'perteDePoids' | 'maintientDuPoids' | 'priseDeMasse' | '';
     activityLabel?: string; //////////////////////////////////////////////////

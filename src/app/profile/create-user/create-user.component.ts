@@ -28,6 +28,7 @@ export class CreateUserComponent {
     weight: 0,
     gender: '',
     birthdate: '',
+    age: 0,
     activity: '',
     goal: '',
   };

@@ -8,11 +8,11 @@
                 <input type="email" id="email" [(ngModel)]="userLogin.email" name="email" required>
             </div>
             <div class="form_group">
-                <label for="password">Password </label>
+                <label for="password">Mot de passe </label>
                 <input type="password" id="password" [(ngModel)]="userLogin.password" name="password" required>
             </div>
             <button type="submit" class="login_button">Se connecter</button><br><br>
         </form>
-        <button (click)="goToCreateAccount()">Créer un compte</button>
+        <button (click)="goToCreateAccount()" class="login_button">Créer un compte</button>
     </div>
 </div>

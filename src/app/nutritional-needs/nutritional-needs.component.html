@@ -1,11 +1,39 @@
-<p>D'apèrs vos informations, votre métabolisme de base est estimé à : {{ nutritionalNeeds?.bmr | integerFormat }} calories</p><br>
+<div class="nutritional-needs_card">
+    <h2>Besoins Nutritionnels</h2>
 
-<p>D'après votre niveau d'activité et votre objectif, vous avez besoin de consommer : {{ nutritionalNeeds?.targetCalories | integerFormat }} calories</p><br>
+    <p class="nutritional-needs_title">Métabolisme de base</p>
+    <div class="nutritional-needs_info">
+        <strong>{{ nutritionalNeeds?.bmr | integerFormat }} calories</strong>
+    </div>
 
-<p>Pour atteindre votre objectif : {{ currentUser?.goalLabel }}, vous avez besoin de consommer : {{ nutritionalNeeds?.proteins | integerFormat }} g de protéines, {{ nutritionalNeeds?.carbohydrates | integerFormat }} g de glucides et {{ nutritionalNeeds?.lipids | integerFormat }} g de lipides</p><br>
+    <p class="nutritional-needs_title">Calories à atteindre</p>
+    <div class="nutritional-needs_info">
+        <strong>{{ nutritionalNeeds?.targetCalories | integerFormat }} calories</strong>
+    </div>
 
-<p>Protéines en calories : {{ nutritionalNeeds?.proteinsCalories | integerFormat }}</p>
-<p>Carbohydrates en calories : {{ nutritionalNeeds?.carbohydratesCalories | integerFormat }}</p>
-<p>Lipides en calories : {{ nutritionalNeeds?.lipidsCalories | integerFormat }}</p>
+    <p class="nutritional-needs_title">Pour atteindre votre objectif : <strong>{{ currentUser?.goalLabel }}</strong>, vous avez besoin de consommer</p>
+    <div class="nutritional-needs_info_macros">
+        <span class="nutritional-needs_info_macros_title">Protéines</span>
+        <span class="nutritional-needs_info_macros_title">Glucides</span>
+        <span class="nutritional-needs_info_macros_title">Lipdes</span>
+        <div class="nutritional-needs_info_macros_proteins">
+            <p class="nutritional-needs_info_macros_value">{{ nutritionalNeeds?.proteins | integerFormat }} g</p>
+        </div>
+        <div class="nutritional-needs_info_macros_carbohydrates">
+            <p class="nutritional-needs_info_macros_value">{{ nutritionalNeeds?.carbohydrates | integerFormat }} g</p>
+        </div>
+        <div class="nutritional-needs_info_macros_lipids">
+            <p class="nutritional-needs_info_macros_value">{{ nutritionalNeeds?.lipids | integerFormat }} g</p>
+        </div>
+    </div>
+    
+    <!--
+    <div class="calories_from_macros">
+        <p>Protéines : <strong>{{ nutritionalNeeds?.proteinsCalories | integerFormat }} kcal</strong></p>
+        <p>Glucides : <strong>{{ nutritionalNeeds?.carbohydratesCalories | integerFormat }} kcal</strong></p>
+        <p>Lipdes : <strong>{{ nutritionalNeeds?.lipidsCalories | integerFormat }} kcal</strong></p>
+    </div>
+    -->
+</div>
 
 <router-outlet></router-outlet>

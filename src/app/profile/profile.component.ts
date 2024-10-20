@@ -23,6 +23,28 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.userLoginService.getCurrentUser();
+
+    if (this.currentUser && this.currentUser.birthdate) {
+      this.currentUser.age = this.calculateAge(this.currentUser.birthdate);
+    }
+  }
+
+  calculateAge(birthdate: string): number | null {
+    if (!birthdate) {
+      return null;
+    }
+
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+
+    // Si le mois d'anniversaire n'est pas encore passé, soustraire 1
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+
+    return age;
   }
 
   logout() {

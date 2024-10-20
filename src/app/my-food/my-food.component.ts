@@ -5,12 +5,11 @@ import { Food } from './food';
 import { MyFoodBorderCardDirective } from './my-food-border-card.directive';
 import { FoodService } from '../food.service'; //
 import { FormatDecimalPipe } from './format-decimal.pipe';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, switchMap } from 'rxjs';
 import { SortPipe } from './sort.pipe';
 import { User } from '../profile/user.model';
 import { UserLoginService } from '../userLogin.service';
 import { SearchFoodComponent } from './search-food/search-food.component';
+import { IntegerFormatPipe } from '../nutritional-needs/integer-format.pipe';
 
 @Component({
   selector: 'app-my-food',
@@ -22,7 +21,8 @@ import { SearchFoodComponent } from './search-food/search-food.component';
     MyFoodBorderCardDirective,
     FormatDecimalPipe,
     SortPipe,
-    SearchFoodComponent
+    SearchFoodComponent,
+    IntegerFormatPipe
   ],
   templateUrl: './my-food.component.html',
   styles: []

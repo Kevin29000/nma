@@ -27,9 +27,15 @@ export class UserLoginService {
       .pipe(
         map((user: User) => {
           if (user) {
-            user.activityLabel = UserActivity[user.activity.toUpperCase() as keyof typeof UserActivity]; ////////////////////////////////////////
-            user.genderLabel = UserGender[user.gender.toUpperCase() as keyof typeof UserGender];
-            user.goalLabel = UserGoal[user.goal.toUpperCase() as keyof typeof UserGoal];
+            if (user.activity) {
+              user.activityLabel = UserActivity[user.activity.toUpperCase() as keyof typeof UserActivity]; ////////////////////////////////////////
+            }
+            if (user.gender) {
+              user.genderLabel = UserGender[user.gender.toUpperCase() as keyof typeof UserGender];
+            }
+            if (user.goal) {
+              user.goalLabel = UserGoal[user.goal.toUpperCase() as keyof typeof UserGoal];
+            }
             localStorage.setItem('currentUser', JSON.stringify(user));
           }
           return user;

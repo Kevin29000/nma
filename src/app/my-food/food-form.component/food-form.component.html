@@ -1,61 +1,36 @@
 <form *ngIf="food" (ngSubmit)="onSubmit()" #foodForm="ngForm" class="food_form">
-    <div class="my-food-detail-edit_card_container">
-        <div class="my-food-detail-edit_card">
-            <table class="my-food-detail-edit_table">
-                <tr>
-                    <td>
-                        <label for="name">Nom</label>
-                    </td>
-                    <td>
-                        <input type="text" id="name" required pattern="^[a-zA-Z0-9àâéèç\s]{1,25}$" [(ngModel)]="food.name" name="name" #name="ngModel" class="food-edit-input">
-                        <div [hidden]="name.valid || name.pristine">Le nom de l'aliment est requis (1-25).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="calories">Calories</label>
-                    </td>
-                    <td>
-                        <input type="number" id="calories" required pattern="^[0-9]{1,3}$" [(ngModel)]="food.calories" name="calories" #calories="ngModel" class="food-edit-input">
-                        <div [hidden]="calories.valid || calories.pristine">Le nombre de calories est requis (1-999).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="proteins">Protéines</label>
-                    </td>
-                    <td>
-                        <input type="text" id="proteins" required pattern="^[0-9]{1,2}(.[0-9]{1,2})?$" [(ngModel)]="food.proteins" name="proteins" #proteins="ngModel" class="food-edit-input">
-                        <div [hidden]="proteins.valid || proteins.pristine">Le nombre de protéines est requis (0,00 à 99,99).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="carbohydrates">Glucides</label>
-                    </td>
-                    <td>
-                        <input type="text" id="carbohydrates" required pattern="^[0-9]{1,2}(.[0-9]{1,2})?$" [(ngModel)]="food.carbohydrates" name="carbohydrates" #carbohydrates="ngModel" class="food-edit-input">
-                        <div [hidden]="carbohydrates.valid || carbohydrates.pristine">Le nombre de glucides est requis (0,00 à 99,99).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="lipids">Lipides</label>
-                    </td>
-                    <td>
-                        <input type="text" id="lipids" required pattern="^[0-9]{1,2}(.[0-9]{1,2})?$" [(ngModel)]="food.lipids" name="lipids" #lipids="ngModel" class="food-edit-input">
-                        <div [hidden]="lipids.valid || lipids.pristine">Le nombre de lipides est requis (0,00 à 99,99).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a (click)="backToFood(food)">Retour</a>
-                    </td>
-                    <td>
-                        <button type="submit" [disabled]="!foodForm.form.valid" class="food-edit_submit_button">Valider</button>
-                    </td>
-                </tr>
-            </table>
+    <div class="my-food-detail_edit_container">
+        <div class="my-food-detail_edit_card">
+            <div class="my-food-detail_edit_content">
+                <label for="name">Nom</label>
+                <input type="text" id="name" required pattern="^[a-zA-Z0-9àâéèç\s']{1,25}$" [(ngModel)]="food.name" name="name" #name="ngModel" class="my-food-detail_edit_input">
+                <div [hidden]="name.valid || name.pristine">Le nom de l'aliment est requis (1-25).</div>
+            </div>
+            <div class="my-food-detail_edit_content">
+                <label for="calories">Calories</label>
+                <input type="number" id="calories" required pattern="^[0-9]{1,3}$" [(ngModel)]="food.calories" name="calories" #calories="ngModel" class="my-food-detail_edit_input">
+                <div [hidden]="calories.valid || calories.pristine">Le nombre de calories est requis (0-999).</div>
+            </div>
+            <div class="my-food-detail_edit_content">
+                <label for="proteins">Protéines</label>
+                <input type="text" id="proteins" required pattern="^(100([.,]0{1,2})?|[0-9]{1,2}([.,][0-9]{1,2})?)$" [(ngModel)]="displayFood.proteins" name="proteins" #proteins="ngModel" (keydown)="preventLetters($event)" class="my-food-detail_edit_input">
+                <div [hidden]="proteins.valid || proteins.pristine">Le nombre de protéines est requis (0,00 à 100,00).</div>
+            </div>
+            <div class="my-food-detail_edit_content">
+                <label for="carbohydrates">Glucides</label>
+                <input type="text" id="carbohydrates" required pattern="^(100([.,]0{1,2})?|[0-9]{1,2}([.,][0-9]{1,2})?)$" [(ngModel)]="displayFood.carbohydrates" name="carbohydrates" #carbohydrates="ngModel" (keydown)="preventLetters($event)" class="my-food-detail_edit_input">
+                <div [hidden]="carbohydrates.valid || carbohydrates.pristine">Le nombre de glucides est requis (0,00 à 100,00).</div>
+            </div>
+            <div class="my-food-detail_edit_content">
+                <label for="lipids">Lipides</label>
+                <input type="text" id="lipids" required pattern="^(100([.,]0{1,2})?|[0-9]{1,2}([.,][0-9]{1,2})?)$" [(ngModel)]="displayFood.lipids" name="lipids" #lipids="ngModel" (keydown)="preventLetters($event)" class="my-food-detail_edit_input">
+                <div [hidden]="lipids.valid || lipids.pristine">Le nombre de lipides est requis (0,00 à 100,00).</div>
+            </div>
+                    
+            <div class="my-food-edit_buttons_container">
+                <button type="submit" [disabled]="!foodForm.form.valid" class="my-food-edit_button">Valider</button>
+                <button (click)="backToFood(food)" class="my-food-edit_button">Retour</button>
+            </div>
         </div>
     </div>
 </form>

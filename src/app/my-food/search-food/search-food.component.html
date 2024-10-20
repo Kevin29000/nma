@@ -1,8 +1,8 @@
 <div class="input_search_food_container">
-    <input #searchBox (keyup)="search(searchBox.value)" placeholder="Rechercher un aliment" class="input_search_food">
+    <input #searchBox (keyup)="search(searchBox.value)" pattern="^[a-zA-Z0-9àâéèç\s']{1,25}$" placeholder="Rechercher un aliment" class="input_search_food">
     <div class="input_search_food_lines">
         <a *ngFor="let food of foods$ | async" (click)="goToDetail(food)">
-            {{ food.name }}
+            <p class="search_food_result">{{ food.name }}</p>
         </a>
     </div>
 </div>

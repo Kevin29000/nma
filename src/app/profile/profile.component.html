@@ -1,21 +1,26 @@
-<h1>Profil</h1><br>
-<table>
-    <tr><td>Email :</td><td>{{ currentUser?.email }}</td></tr>
-    <tr><td>Password :</td><td>{{ currentUser?.password }}</td></tr>
-    <tr><td>Nom :</td><td>{{ currentUser?.lastName }}</td></tr>
-    <tr><td>Prénom :</td><td>{{ currentUser?.firstName }}</td></tr>
-    <tr><td>Taille :</td><td>{{ currentUser?.height }} cm</td></tr>
-    <tr><td>Poids :</td><td>{{ currentUser?.weight }} kg</td></tr>
-    <tr><td>Genre :</td><td>{{ currentUser?.genderLabel }}</td></tr>
-    <tr><td>Âge :</td><td>{{ currentUser?.birthdate }}</td></tr>
-    <tr><td>Activité :</td><td>{{ currentUser?.activityLabel }}</td></tr>
-    <tr><td>Objectif :</td><td>{{ currentUser?.goalLabel }}</td></tr>
-</table> <br>
+<div class="profile_container">
+    <h1>Profil</h1><br>
+    <table class="profile_table">
+        <tr><td>Email :</td><td>{{ currentUser?.email }}</td></tr>
+        <!--<tr><td>Password :</td><td>{{ currentUser?.password }}</td></tr>-->
+        <tr><td>Nom :</td><td>{{ currentUser?.lastName }}</td></tr>
+        <tr><td>Prénom :</td><td>{{ currentUser?.firstName }}</td></tr>
+        <tr><td>Taille :</td><td>{{ currentUser?.height }} cm</td></tr>
+        <tr><td>Poids :</td><td>{{ currentUser?.weight }} kg</td></tr>
+        <tr><td>Genre :</td><td>{{ currentUser?.genderLabel }}</td></tr>
+        <tr><td>Âge :</td><td>{{ currentUser?.age }} ans</td></tr>
+        <tr><td>Activité :</td><td>{{ currentUser?.activityLabel }}</td></tr>
+        <tr><td>Objectif :</td><td>{{ currentUser?.goalLabel }}</td></tr>
+    </table>
+</div>
 
-
-<button (click)="goToUpdateUserCredentials()" class="logout_button">Modifier mes logs</button><br><br>
-<button (click)="goToUpdateUserProfile()" class="logout_button">Modifier mon profil</button><br><br>
-<button (click)="deleteUser()" class="logout_button">Supprimer mon compte</button><br><br>
-<button (click)="logout()" class="logout_button">Se déconnecter</button>
+<div class="profile_edit_button_container">
+    <button (click)="goToUpdateUserCredentials()" class="profile_edit_button">Modifier mes identifiants</button>
+    <button (click)="goToUpdateUserProfile()" class="profile_edit_button">Modifier mon profil</button>
+</div>
+<div class="profile_buttons_container">
+    <button (click)="deleteUser()" class="profile_button">Supprimer mon compte</button>
+    <button (click)="logout()" class="profile_button">Se déconnecter</button><br><br>
+</div>
 
 <router-outlet></router-outlet>

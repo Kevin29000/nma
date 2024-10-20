@@ -6,7 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FormatDecimalPipe implements PipeTransform {
 
-  transform(value: number): string {
+  transform(value: number | undefined): string {
+    if (value === undefined) {
+      return '';
+    }
     return value.toFixed(2).replace('.', ',');
   }
   

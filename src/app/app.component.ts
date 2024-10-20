@@ -30,8 +30,8 @@ export class AppComponent {
   }
 
   checkRoute() {
-    const isNewUser = this.userLoginService.isNewUser;
+    const isLoggedIn = this.userLoginService.isLoggedIn();
 
-    this.showAppContent = !isNewUser && this.router.url !== '/login' && this.router.url !== '/create-account';
+    this.showAppContent = isLoggedIn && this.router.url !== '/login' && this.router.url !== '/create-account';
   }
 }

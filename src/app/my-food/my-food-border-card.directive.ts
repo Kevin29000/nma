@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostListener, Input } from "@angular/core";
     standalone: true
 })
 export class MyFoodBorderCardDirective {
-    private initialColor: string = '#f5f5f5';
+    private initialColor: string = '#4A4A4A';
     private borderColor: string = '#009688';
     private defaultHeight: number = 150;
 

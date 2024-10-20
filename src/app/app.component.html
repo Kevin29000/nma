@@ -1,14 +1,13 @@
-<div *ngIf="showAppContent"> <!--Masque le contenu du menu sur la page de login-->
-    <div class="header"> 
-        <nav>
-            <ul class="menu">
-                <p class="title_app">Nutrition Monitoring App</p>
-                <li><a routerLink="/profile">Profil</a></li>
-                <li><a routerLink="/my-food">Mes aliments</a></li>
-                <li><a routerLink="/nutritional-needs">Besoins Nutritionelles</a></li>
-                <li><a routerLink="/nutritional-monitoring">Suivie Nutritionnelle</a></li>
-            </ul>
-        </nav>
-    </div>
+<div *ngIf="showAppContent" class="header"> <!--Masque le contenu du menu sur la page de login-->
+    <nav>
+        <ul class="menu">
+            <p class="title_app">Quasar Nutrition</p>
+            <li><a routerLink="/profile">Profil</a></li>
+            <li><a routerLink="/my-food">Mes aliments</a></li>
+            <li><a routerLink="/nutritional-needs">Besoins Nutritionels</a></li>
+            <li><a routerLink="/nutritional-monitoring">Suivi Nutritionnel</a></li>
+        </ul>
+    </nav>
 </div>
+
 <router-outlet></router-outlet>

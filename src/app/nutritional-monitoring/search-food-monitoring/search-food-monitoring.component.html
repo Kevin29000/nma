@@ -1,0 +1,8 @@
+<div class="nutritional-monitoring_input_search_food_container">
+    <input #searchBox (keyup)="search(searchBox.value)" pattern="^[a-zA-Z0-9àâéèç\s']{1,25}$" placeholder="Rechercher un aliment" class="nutritional-monitoring_input_search_food">
+    <div class="nutritional-monitoring_input_search_food_lines">
+        <a *ngFor="let food of foods$ | async" (click)="openDetailFood(food)">
+            <p>{{ food.name }}</p>
+        </a>
+    </div>
+</div>

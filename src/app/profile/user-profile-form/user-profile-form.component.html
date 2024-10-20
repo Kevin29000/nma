@@ -1,105 +1,59 @@
-<form *ngIf="user" (ngSubmit)="onSubmit()" #userProfileForm="ngForm" class="food_form">
-    <div class="my-food-detail-edit_card_container">
-        <div class="my-food-detail-edit_card">
-            <table class="my-food-detail-edit_table">
-                <tr>
-                    <td>
-                        <label for="lastName">Nom</label>
-                    </td>
-                    <td>
-                        <input type="text" id="lastName" required pattern="" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" class="food-edit-input">
-                        <div [hidden]="lastName.valid || lastName.pristine">Le nom est requis (1-25).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="firstName">Prénom</label>
-                    </td>
-                    <td>
-                        <input type="text" id="firstName" required pattern="" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" class="food-edit-input">
-                        <div [hidden]="firstName.valid || firstName.pristine">Le prénom est requis (1-25).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="height">Taille</label>
-                    </td>
-                    <td>
-                        <input type="text" id="height" required pattern="" [(ngModel)]="user.height" name="height" #height="ngModel" class="food-edit-input">
-                        <div [hidden]="height.valid || height.pristine">La taille est requise (1-25).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="weight">Poids</label>
-                    </td>
-                    <td>
-                        <input type="text" id="weight" required pattern="" [(ngModel)]="user.weight" name="weight" #weight="ngModel" class="food-edit-input">
-                        <div [hidden]="weight.valid || weight.pristine">Le poids est requis (1-3).</div>
-                    </td>
-                </tr>
-                <!--
-                <tr>
-                    <td>
-                        <label for="gender">Genre</label>
-                    </td>
-                    <td>
-                        <input type="text" id="gender" required pattern="" [(ngModel)]="user.gender" name="gender" #gender="ngModel" class="food-edit-input">
-                        <div [hidden]="gender.valid || gender.pristine">Le genre est requis (1-3).</div>
-                    </td>
-                </tr>
-                -->
-                <tr>
-                    <td>
-                        <label for="gender">Genre</label>
-                    </td>
-                    <td>
-                        <select name="gender" id="gender" [(ngModel)]="user.gender" class="food-edit-input">
-                            <option value="">-- Veuillez choisir une option --</option>
-                            <option *ngFor="let gender of genders" [value]="gender.key">{{ gender.value }}</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="birthdate">Date de naissance</label>
-                    </td>
-                    <td>
-                        <input type="text" id="birthdate" required pattern="" [(ngModel)]="user.birthdate" name="birthdate" #birthdate="ngModel" class="food-edit-input">
-                        <div [hidden]="birthdate.valid || birthdate.pristine">La date de naissance est requise (1-3).</div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="activity">Activité</label>
-                    </td>
-                    <td>
-                        <select name="activity" id="activity" [(ngModel)]="user.activity" class="food-edit-input">
-                            <option value="">-- Veuillez choisir une option --</option>
-                            <option *ngFor="let activity of activities" [value]="activity.key">{{ activity.value }}</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="goal">Objectif</label>
-                    </td>
-                    <td>
-                        <select name="goal" id="goal" [(ngModel)]="user.goal" class="food-edit-input">
-                            <option value="">-- Veuillez choisir une option --</option>
-                            <option *ngFor="let goal of goals" [value]="goal.key">{{ goal.value }}</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a (click)="backToProfile()">Retour</a>
-                    </td>
-                    <td>
-                        <button type="submit" [disabled]="!userProfileForm.form.valid" class="food-edit_submit_button">Valider</button>
-                    </td>
-                </tr>
-            </table>
+<form *ngIf="user" (ngSubmit)="onSubmit()" #userProfileForm="ngForm">
+    <div class="profile_form_container">
+        <div class="profile_form_card">
+            <div class="profile_form_content">
+                <label for="lastName">Nom</label>
+                <input type="text" id="lastName" required pattern="^[A-Za-zÀ-ÿ' -]{1,25}$" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel" class="profile_form_input">
+                <div [hidden]="lastName.valid || lastName.pristine">Le nom est incorrect.</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="firstName">Prénom</label>
+                <input type="text" id="firstName" required pattern="^[A-Za-zÀ-ÿ' -]{1,25}$" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel" class="profile_form_input">
+                <div [hidden]="firstName.valid || firstName.pristine">Le prénom est incorrect.</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="height">Taille</label>
+                <input type="number" id="height" required pattern="^(1[0-9]{2}|2[0-4][0-9]|250)$" [(ngModel)]="user.height" name="height" #height="ngModel" class="profile_form_input">
+                <div [hidden]="height.valid || height.pristine">La taille est incorrecte.</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="weight">Poids</label>
+                <input type="number" id="weight" required pattern="^(0|[1-9][0-9]?|1[0-9]{2}|2[0-4][0-9]|250)(\.[0-9]{1,2})?$" [(ngModel)]="user.weight" name="weight" #weight="ngModel" class="profile_form_input">
+                <div [hidden]="weight.valid || weight.pristine">Le poids est incorrect.</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="gender">Genre</label>
+                <select name="gender" id="gender" [(ngModel)]="user.gender" class="profile_form_input" required>
+                    <option value="">-- Veuillez choisir une option --</option>
+                    <option *ngFor="let gender of genders" [value]="gender.key">{{ gender.value }}</option>
+                </select>
+                <div [hidden]="user.gender !== ''">Veuillez choisir un genre.</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="birthdate">Date de naissance</label>
+                <input type="text" id="birthdate" required pattern="" [(ngModel)]="user.birthdate" name="birthdate" #birthdate="ngModel" class="profile_form_input">
+                <div [hidden]="birthdate.valid || birthdate.pristine">La date de naissance est requise (1-3).</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="activity">Activité</label>
+                <select name="activity" id="activity" [(ngModel)]="user.activity" class="profile_form_input" required>
+                    <option value="">-- Veuillez choisir une option --</option>
+                    <option *ngFor="let activity of activities" [value]="activity.key">{{ activity.value }}</option>
+                </select>
+                <div [hidden]="user.activity !== ''">Veuillez choisir une activité.</div>
+            </div>
+            <div class="profile_form_content">
+                <label for="goal">Objectif</label>
+                <select name="goal" id="goal" [(ngModel)]="user.goal" class="profile_form_input" required>
+                    <option value="">-- Veuillez choisir une option --</option>
+                    <option *ngFor="let goal of goals" [value]="goal.key">{{ goal.value }}</option>
+                </select>
+                <div [hidden]="user.goal !== ''">Veuillez choisir un objectif.</div>
+            </div>                
+            <div class="froms_profile_buttons_container">
+                <button type="submit" [disabled]="!userProfileForm.form.valid" class="froms_profile_button">Valider</button>
+                <button (click)="navigateBack()" class="froms_profile_button">Retour</button>
+            </div>
         </div>
     </div>
 </form>

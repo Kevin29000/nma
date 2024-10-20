@@ -1,4 +1,202 @@
-Tableau / journal de bord
+<div>
+    <div class="nutritional_monitoring_totals_container">
+        <div class="nutritional_monitoring_totals_sub_container">
+            <div class="nutritional_monitoring_totals_container_title"><h2>Totaux journaliers</h2></div>
+            <div class="calories">{{ totalDailyCalories | integerFormat }} / {{ nutritionalNeeds?.targetCalories | integerFormat }} kcal</div>
+            <progress   [value]="totalDailyCalories" 
+                        [max]="nutritionalNeeds?.targetCalories"
+                        [ngClass]="{'progress-bar-red': totalDailyCalories > (nutritionalNeeds?.targetCalories ?? 0)}"
+                        class="progress_calories">
+            </progress>
+            <div class="macro_totals">
+                <div class="macro">
+                    <div class="proteins">{{ totalDailyProteins | integerFormat }} / {{ nutritionalNeeds?.proteins | integerFormat }} g</div>
+                    <progress   [value]="totalDailyProteins" 
+                            [max]="nutritionalNeeds?.proteins"
+                            [ngClass]="{'progress-bar-red': totalDailyProteins > (nutritionalNeeds?.proteins ?? 0)}"
+                            class="progress_proteins">
+                    </progress>
+                </div>
+                <div class="macro">
+                    <div class="carbohydrates">{{ totalDailyCarbohydrates | integerFormat }} / {{ nutritionalNeeds?.carbohydrates | integerFormat }} g</div>
+                    <progress   [value]="totalDailyCarbohydrates" 
+                            [max]="nutritionalNeeds?.carbohydrates"
+                            [ngClass]="{'progress-bar-red': totalDailyCarbohydrates > (nutritionalNeeds?.carbohydrates ?? 0)}"
+                            class="progress_carbohydrates">
+                    </progress>
+                </div>
+                <div class="macro">
+                    <div class="lipids">{{ totalDailyLipids | integerFormat }} / {{ nutritionalNeeds?.lipids | integerFormat }} g</div>
+                    <progress   [value]="totalDailyLipids" 
+                            [max]="nutritionalNeeds?.lipids"
+                            [ngClass]="{'progress-bar-red': totalDailyLipids > (nutritionalNeeds?.lipids ?? 0)}"
+                            class="progress_lipids">
+                    </progress>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="meals_container">
+        <div class="meals_container_title">Mes repas</div>
+        <div *ngFor="let meal of meals" class="meal_container">
+            <div class="meal_title"><h2>{{ meal.name }}</h2><p (click)="deleteMeal(meal.id)">Supprimer ce repas</p></div>
+            <div *ngFor="let mealFood of meal.foods" (click)="openEditMealFood(mealFood)" class="meal_foods">
+                <div class="meal_food_info">
+                    <p class="meal_food_name">{{ mealFood.food.name }}</p>
+                    <p class="meal_food_calories">{{ mealFood.caloriesByQuantity | integerFormat }} kcal</p>
+                </div>
+                <div class="meal_food_details">
+                    <p class="meal_food_quantity">{{ mealFood.quantity }} g</p>
+                    <div class="meal_food_macros">
+                        <div class="proteins">{{ mealFood.proteinsByQuantity | formatDecimal }} g</div>
+                        <div class="carbohydrates">{{ mealFood.carbohydratesByQuantity | formatDecimal }} g</div>
+                        <div class="lipids">{{ mealFood.lipidsByQuantity | formatDecimal }} g</div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="totals_meal_container">
+                <div class="nutritient-monitoring_total_calories_value">{{ meal.totalMealCalories | integerFormat }} kcal</div>
+                <div class="totals_meal_macros">
+                    <div class="proteins">{{ meal.totalMealProteins | formatDecimal }} g</div>
+                    <div class="carbohydrates">{{ meal.totalMealCarbohydrates | formatDecimal }} g</div>
+                    <div class="lipids">{{ meal.totalMealLipids | formatDecimal }} g</div>
+                </div>
+            </div>
+            <div class="center">
+                <button (click)="openAddFoods(meal)" class="nutritional_monitoring_button">Ajouter un aliment</button>
+            </div>
+        </div>
+        <div class="center">
+            <button (click)="openAddMealForm()" class="nutritional_monitoring_button">Ajouter un repas</button><br><br>
+        </div>
+    </div>
 
+    <div>
+        <div class="popup-overlay" *ngIf="isAddingMeal">
+            <div class="popup-content">
+                <div class="nutritional_monitoring_forms_titles">
+                    <h3>Ajouter un nouveau repas</h3>
+                </div>
+                <form (ngSubmit)="onSubmitMealForm()" #addMealForm="ngForm">
+                    <div class="add_meal_container">
+                        <label for="name"> Nom du repas</label>
+                        <input type="text" id="mealName" pattern="^[a-zA-Z0-9àâéèêç\s']{1,25}$" [(ngModel)]="newMealName" name="mealName" #mealName="ngModel" required/>
+                        <!--<div [hidden]="mealName.valid || mealName.pristine">Le nom du repas est invalide.</div>-->
+                    </div>
+
+                    <div class="nutritional_monitoring_forms_buttons_container">
+                        <button type="submit" [disabled]="!addMealForm.form.valid" class="nutritional_monitoring_forms_button">Ajouter</button>
+                        <button type="button" (click)="cancelAddMeal()" class="nutritional_monitoring_forms_button">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup-overlay" *ngIf="isEditMealFood">
+            <div class="popup-content">
+                <div class="nutritional_monitoring_forms_titles">
+                    <h3>{{ selectedMealFood?.food?.name || '' }}</h3>
+                    <p (click)="deleteFoodFromMeal(selectedMealFood)">Supprimer</p>
+                </div>
+                <form (ngSubmit)="onSubmitMealFoodForm()">
+                    <div class="quantity_forms_popup">
+                        <label for="quantity">Quantité (g) :</label>
+                        <input type="number" id="quantity" [(ngModel)]="newQuantity" name="quantity" min="1" max="500" (input)="limitInputValue($event)" (input)="updateMacros()" />
+                    </div>
+                    <div class="nutritional_forms_info">
+                        <span class="nutritient_form_title">Calories</span>
+                        <span class="nutritient_form_title">Protéines</span>
+                        <span class="nutritient_form_title">Glucides</span>
+                        <span class="nutritient_form_title">Lipides</span>
+                        <span class="nutritient_form_value">{{ selectedMealFood?.caloriesByQuantity || 0 | integerFormat }} kcal</span>
+                        <div class="nutritient_proteins_form">
+                            <span class="nutritient_form_value">{{ selectedMealFood?.proteinsByQuantity || 0 | formatDecimal }} g</span>
+                        </div>
+                        <div class="nutritient_carbohydrates_form">
+                            <span class="nutritient_form_value">{{ selectedMealFood?.carbohydratesByQuantity || 0 | formatDecimal }} g</span>
+                        </div>
+                        <div class="nutritient_lipids_form">
+                            <span class="nutritient_form_value">{{ selectedMealFood?.lipidsByQuantity || 0 | formatDecimal }} g</span>
+                        </div>
+                    </div>
+                    <div class="nutritional_monitoring_forms_buttons_container">
+                        <button type="submit" class="nutritional_monitoring_forms_button">Valider</button>
+                        <button type="button" (click)="cancelEditMealFood()" class="nutritional_monitoring_forms_button">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="popup-overlay" *ngIf="isAddFood">
+            <div class="foods-popup-content">
+                <div class="add_food_header_container">
+                    <h3 class="title_select_add_foods">Choisir un aliment</h3><div class="close_cross" (click)="closeAddFoods()">&times;</div>
+                </div>
+                <app-search-food-monitoring (foodSelected)="openDetailFood($event)"></app-search-food-monitoring>
+                <div class="foods_card_container">
+                    <div *ngFor="let food of foodsList | sort:'name'" (click)="openDetailFood(food)" class="foods_card" myFoodBorderCard>
+                        <div class="my-food_name">
+                            {{ food.name }}
+                        </div>
+                        <div class="my-food_macros_container">
+                            <span class="my-food_title">Calories</span>
+                            <span class="my-food_title">Protéines</span>
+                            <span class="my-food_title">Glucides</span>
+                            <span class="my-food_title">Lipides</span>
+                            <div class="my-food_value">
+                                {{ food.calories | integerFormat }} kcal
+                            </div>
+                            <div class="my-food_proteins">
+                                <p class="my-food_value">{{ food.proteins | formatDecimal }} g</p>
+                            </div>
+                            <div class="my-food_carbohydrates">
+                                <p class="my-food_value">{{ food.carbohydrates | formatDecimal }} g</p>
+                            </div>
+                            <div class="my-food_lipids">
+                                <p class="my-food_value">{{ food.lipids | formatDecimal }} g</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup-overlay" *ngIf="isDetailFood">
+            <div class="popup-content">
+                <form>
+                    <div class="nutritional_monitoring_forms_titles">
+                        <h3> {{ selectedFood?.name }}</h3>
+                    </div>
+                    <div class="quantity_forms_popup">
+                        <label for="quantity">Quantité (g) :</label>
+                        <input type="number" id="quantity" [(ngModel)]="newQuantity" name="quantity" min="1" max="500" (input)="limitInputValue($event)" required (input)="updateMacros2()">
+                    </div>
+                    <div class="nutritional_forms_info">
+                        <span class="nutritient_form_title">Calories</span>
+                        <span class="nutritient_form_title">Protéines</span>
+                        <span class="nutritient_form_title">Glucides</span>
+                        <span class="nutritient_form_title">Lipides</span>
+                        <span class="nutritient_form_value">{{ selectedFood?.calories || 0 | integerFormat }} kcal</span>
+                        <div class="nutritient_proteins_form">
+                            <span class="nutritient_form_value">{{ selectedFood?.proteins || 0 | formatDecimal }} g</span>
+                        </div>
+                        <div class="nutritient_carbohydrates_form">
+                            <span class="nutritient_form_value">{{ selectedFood?.carbohydrates || 0 | formatDecimal }} g</span>
+                        </div>
+                        <div class="nutritient_lipids_form">
+                            <span class="nutritient_form_value">{{ selectedFood?.lipids || 0 | formatDecimal }} g</span>
+                        </div>
+                    </div>                    
+                    <div class="nutritional_monitoring_forms_buttons_container">
+                        <button (click)="addFoodToMeal()" class="nutritional_monitoring_forms_button">Ajouter</button>
+                        <button (click)="closeDetailFood()" class="nutritional_monitoring_forms_button">Annuler</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <router-outlet></router-outlet>

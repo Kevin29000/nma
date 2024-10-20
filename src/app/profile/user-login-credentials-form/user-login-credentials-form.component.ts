@@ -30,6 +30,8 @@ export class UserLoginCredentialsFormComponent {
 
   email: string | null = null;
 
+  message: string = '';
+
   constructor(
     private router: Router,
     private userLoginService: UserLoginService
@@ -42,7 +44,7 @@ export class UserLoginCredentialsFormComponent {
   onSubmit() {
       if (this.newPassword !== this.confirmPassword) {
         this.passwordsDoNotMatch = true;
-        console.error('Les mots de passe ne correspondent pas');
+        this.message = ('Les mots de passe ne correspondent pas');
         return;
       } else {
         this.passwordsDoNotMatch = false;
@@ -69,7 +71,7 @@ export class UserLoginCredentialsFormComponent {
           },
           (error) => {
             console.error('Erreur lors de la mise à jour des logs', error);
-            console.error('Détails de l\'erreur:', error.error); // Détails supplémentaires
+            this.message = ('Mot de passe actuel incorrect') // Détails supplémentaires
           }
         );
       } 

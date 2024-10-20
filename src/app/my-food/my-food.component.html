@@ -5,14 +5,29 @@
 <app-search-food></app-search-food>
 
 <div class="my-food_card_container">
-    <div *ngFor="let food of foods | sort:'name' " (click)="goToFood(food)" class="my-food_card" myFoodBorderCard="red">
-        <table class="my-food_table">
-            <tr><td>Nom :</td><td><b>{{ food.name }}</b></td></tr>
-            <tr><td>Calories :</td><td>{{ food.calories }} kcal</td></tr>
-            <tr><td>Protéines :</td><td>{{ food.proteins | formatDecimal }} g</td></tr>
-            <tr><td>Glucides :</td><td>{{ food.carbohydrates | formatDecimal }} g</td></tr>
-            <tr><td>Lipides :</td><td>{{ food.lipids | formatDecimal }} g</td></tr>
-        </table>
+    <div *ngFor="let food of foods | sort:'name' " (click)="goToFood(food)" class="my-food_card" myFoodBorderCard>
+        <div class="my-food_name">
+            {{ food.name }}
+        </div>
+        <div class="my-food_macros_container">
+            <span class="my-food_title">Calories</span>
+            <span class="my-food_title">Protéines</span>
+            <span class="my-food_title">Glucides</span>
+            <span class="my-food_title">Lipides</span>
+            <div class="my-food_value">
+                {{ food.calories | integerFormat }} kcal
+            </div>
+            <div class="my-food_proteins">
+                <p class="my-food_value">{{ food.proteins | formatDecimal }} g</p>
+            </div>
+            <div class="my-food_carbohydrates">
+                <p class="my-food_value">{{ food.carbohydrates | formatDecimal }} g</p>
+            </div>
+            <div class="my-food_lipids">
+                <p class="my-food_value">{{ food.lipids | formatDecimal }} g</p>
+            </div>
+        </div>
+        
     </div>
 </div>
 

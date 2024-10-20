@@ -5,6 +5,7 @@ import { Food } from '../food';
 import { FoodService } from '../../food.service';
 import { FormatDecimalPipe } from '../format-decimal.pipe';
 import { LoaderComponent } from '../loader/loader.component';
+import { IntegerFormatPipe } from '../../nutritional-needs/integer-format.pipe';
 
 @Component({
   selector: 'app-food-detail',
@@ -14,7 +15,8 @@ import { LoaderComponent } from '../loader/loader.component';
     RouterLink,
     CommonModule,
     FormatDecimalPipe,
-    LoaderComponent
+    LoaderComponent,
+    IntegerFormatPipe
   ],
   templateUrl: './food-detail.component.html',
   styles: [ ]
