@@ -11,7 +11,7 @@ import { UserLogin } from './userLogin';
   providedIn: 'root'
 })
 export class UserLoginService {
-  private apiUrl = 'http://localhost:8080/api/users';
+  private apiUrl = 'https://nma-app-c29adc8f1557.herokuapp.com/api/users';
   public isNewUser: boolean = false; // Propriété pour suivre si l'utilisateur est nouveau
 
   constructor(private http:HttpClient) { }

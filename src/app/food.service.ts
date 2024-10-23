@@ -8,7 +8,7 @@ import { DefaultFood } from './my-food/default-food';
   providedIn: 'root'
 })
 export class FoodService {
-  private apiUrl = 'http://localhost:8080/api/food';
+  private apiUrl = 'https://nma-app-c29adc8f1557.herokuapp.com/api/food';
 
   constructor(private http:HttpClient) { }
 

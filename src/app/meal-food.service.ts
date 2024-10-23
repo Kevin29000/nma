@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MealFoodService {
-  private apiUrl = 'http://localhost:8080/api/meals';
+  private apiUrl = 'https://nma-app-c29adc8f1557.herokuapp.com/api/meals';
 
   constructor(private http:HttpClient) { }
 
